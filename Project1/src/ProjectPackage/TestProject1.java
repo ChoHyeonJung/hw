@@ -100,10 +100,10 @@ public class TestProject1 {
 							
 							mainList.get(i).put(str1, str2); // 해당하는 mainList의 map i번째에 key,value생성
 							System.out.println("추 가 완 료");
+						} else {
+							System.out.println("입력하신 고유번호가 존재하지 않습니다.");
 						}
-					} else {
-						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
-					}
+					} 
 				}														
 			} else if (number1 == 3) {
 				System.out.println("갱신항목 선택.");
@@ -121,10 +121,10 @@ public class TestProject1 {
 							mainList.get(i).remove(str1);	 // 키로 받아서 갱신 전 키,값 삭제					
 							mainList.get(i).put(str2, str3); // 해당하는 mainList의 map i번째에 key,value생성
 							System.out.println("갱 신 완 료");
+						} else {
+							System.out.println("입력하신 고유번호가 존재하지 않습니다.");
 						}
-					} else {
-						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
-					}
+					} 
 				}
 				
 			} else if (number1 == 4) {
@@ -133,17 +133,17 @@ public class TestProject1 {
 				number2 = scanner.next();
 					
 				for (int i = 0; i < mainList.size(); i++) {
-					if (mainList.get(i).containsKey("고유번호")) { //mainList에 i번째 키가 고유번호일 경우 true 
+					if (mainList.get(i).keySet().contains("고유번호")) { //mainList에 i번째 키가 고유번호일 경우 true 
 						if(mainList.get(i).values().contains(number2)) { // mainList에 i번째 값에 scanner 입력 값이 존재 할 경
 							System.out.println("삭제할 키 입력 : ");
 							str1 = scanner.next();
 							
 							mainList.get(i).remove(str1); // 키로 받아서 scanner와 일치한 키,값 삭제
 							System.out.println("삭 제 완 료");
+						} else {
+							System.out.println("입력하신 고유번호가 존재하지 않습니다.");
 						}
-					} else {
-						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
-					}
+					} 
 				}
 			
 			}
