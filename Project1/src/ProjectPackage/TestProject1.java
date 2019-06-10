@@ -89,247 +89,66 @@ public class TestProject1 {
 				System.out.println("추가항목 선택.");
 				System.out.println("고유번호 입력 : ");
 				number2 = scanner.next();
-					
-					if(map0.containsValue(number2)) { // map뒤의 숫자를 for문으로 돌리고 싶었는데 방법을 못 찾았습니다...
-						System.out.println("추가할 키 : ");
-						str1 = scanner.next();
-						System.out.println("추가할 값 : ");
-						str2 = scanner.next();
-						map0.put(str1, str2);
-					} else if (map1.containsValue(number2)) {
-						System.out.println("추가할 키 : ");
-						str1 = scanner.next();
-						System.out.println("추가할 값 : ");
-						str2 = scanner.next();
-						map1.put(str1, str2);
-					} else if (map2.containsValue(number2)) {
-						System.out.println("추가할 키 : ");
-						str1 = scanner.next();
-						System.out.println("추가할 값 : ");
-						str2 = scanner.next();
-						map2.put(str1, str2);
-					} else if (map3.containsValue(number2)) {
-						System.out.println("추가할 키 : ");
-						str1 = scanner.next();
-						System.out.println("추가할 값 : ");
-						str2 = scanner.next();
-						map3.put(str1, str2);
+				
+				for (int i = 0; i < mainList.size(); i++) {
+					if (mainList.get(i).containsKey("고유번호")) { //mainList에 i번째 키가 고유번호일 경우 true 
+						if(mainList.get(i).values().contains(number2)) { // mainList에 i번째 값에 scanner 입력 값이 존재 할 경우
+							System.out.println("추가할 키 입력 : ");
+							str1 = scanner.next();
+							System.out.println("추가할 값 입력 : ");
+							str2 = scanner.next();
+							
+							mainList.get(i).put(str1, str2); // 해당하는 mainList의 map i번째에 key,value생성
+							System.out.println("추 가 완 료");
+						}
 					} else {
-						System.out.println("키가 존재하지 않습니다. ");
-					}							
-			
+						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
+					}
+				}														
 			} else if (number1 == 3) {
 				System.out.println("갱신항목 선택.");
 				System.out.println("고유번호 입력 : ");
-				
 				number2 = scanner.next();
+				for (int i = 0; i < mainList.size(); i++) {
+					if (mainList.get(i).containsKey("고유번호")) { //mainList에 i번째 키가 고유번호일 경우 true 
+						if(mainList.get(i).values().contains(number2)) { // mainList에 i번째 값에 scanner 입력 값이 존재 할 경우
+							System.out.println("갱신할 키 입력 : ");
+							str1 = scanner.next();
+							System.out.println("새로 변경할 키 입력 : ");
+							str2 = scanner.next();
+							System.out.println("새로 변경할 값 입력 : ");
+							str3 = scanner.next();
+							mainList.get(i).remove(str1);	 // 키로 받아서 갱신 전 키,값 삭제					
+							mainList.get(i).put(str2, str3); // 해당하는 mainList의 map i번째에 key,value생성
+							System.out.println("갱 신 완 료");
+						}
+					} else {
+						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
+					}
+				}
 				
-				if(map0.containsValue(number2)) { 
-					System.out.println("현재 키 입력  : ");
-					str1 = scanner.next();
-					System.out.println("현재 값 입력 : ");
-					str2 = scanner.next();
-					System.out.println("갱신 키 입력  : ");
-					str3 = scanner.next();
-					System.out.println("갱신 값 입력 : ");
-					str4 = scanner.next();
-					
-					map0.remove(str1);
-					map0.put(str3,str4);
-				} else if (map1.containsValue(number2)) {
-					System.out.println("현재 키 입력  : ");
-					str1 = scanner.next();
-					System.out.println("현재 값 입력 : ");
-					str2 = scanner.next();
-					System.out.println("갱신 키 입력  : ");
-					str3 = scanner.next();
-					System.out.println("갱신 값 입력 : ");
-					str4 = scanner.next();
-					
-					map1.remove(str1);
-					map1.put(str3,str4);
-				} else if (map2.containsValue(number2)) {
-					System.out.println("현재 키 입력  : ");
-					str1 = scanner.next();
-					System.out.println("현재 값 입력 : ");
-					str2 = scanner.next();
-					System.out.println("갱신 키 입력  : ");
-					str3 = scanner.next();
-					System.out.println("갱신 값 입력 : ");
-					str4 = scanner.next();
-					
-					map2.remove(str1);
-					map2.put(str3,str4);
-				} else if (map3.containsValue(number2)) {
-					System.out.println("현재 키 입력  : ");
-					str1 = scanner.next();
-					System.out.println("현재 값 입력 : ");
-					str2 = scanner.next();
-					System.out.println("갱신 키 입력  : ");
-					str3 = scanner.next();
-					System.out.println("갱신 값 입력 : ");
-					str4 = scanner.next();
-					
-					map3.remove(str1);
-					map3.put(str3,str4);
-				} else {
-					System.out.println("키가 존재하지 않습니다. ");
-				}	
 			} else if (number1 == 4) {
 				System.out.println("삭제항목 선택.");
 				System.out.println("고유번호 입력 : ");
 				number2 = scanner.next();
 					
-					if(map0.containsValue(number2)) { 
-						System.out.println("삭제 할 키 : ");
-						str1 = scanner.next();
-						System.out.println("삭제 할 값 : ");
-						str2 = scanner.next();
-						map0.remove(str1, str2);
-					} else if (map1.containsValue(number2)) {
-						System.out.println("삭제 할 키 : ");
-						str1 = scanner.next();
-						System.out.println("삭제 할 값 : ");
-						str2 = scanner.next();
-						map1.remove(str1, str2);
-					} else if (map2.containsValue(number2)) {
-						System.out.println("삭제 할 키 : ");
-						str1 = scanner.next();
-						System.out.println("삭제 할 값 : ");
-						str2 = scanner.next();
-						map2.remove(str1, str2);
-					} else if (map3.containsValue(number2)) {
-						System.out.println("삭제 할 키 : ");
-						str1 = scanner.next();
-						System.out.println("삭제 할 값 : ");
-						str2 = scanner.next();
-						map3.remove(str1, str2);
+				for (int i = 0; i < mainList.size(); i++) {
+					if (mainList.get(i).containsKey("고유번호")) { //mainList에 i번째 키가 고유번호일 경우 true 
+						if(mainList.get(i).values().contains(number2)) { // mainList에 i번째 값에 scanner 입력 값이 존재 할 경
+							System.out.println("삭제할 키 입력 : ");
+							str1 = scanner.next();
+							
+							mainList.get(i).remove(str1); // 키로 받아서 scanner와 일치한 키,값 삭제
+							System.out.println("삭 제 완 료");
+						}
 					} else {
-						System.out.println("키가 존재하지 않습니다. ");
-					}	
-			}
+						System.out.println("입력하신 고유번호가 존재하지 않습니다.");
+					}
+				}
 			
+			}
+
+		
 		}
-
-		
-		
-		/*
-		 * int number1; int number2; String str1;
-		 * 
-		 * List<String> list1 = new ArrayList<String>(); List<String> list2 = new
-		 * ArrayList<String>(); List<String> list3 = new ArrayList<String>();
-		 * List<String> list4 = new ArrayList<String>();
-		 * 
-		 * Map<Integer, Object> map = new HashMap<Integer, Object>();
-		 * 
-		 * 
-		 * list1.add("cho"); list1.add("28"); list1.add("성남시"); list1.add("판교");
-		 * 
-		 * 
-		 * list2.add("zxc"); list2.add("27"); list2.add("안양시"); list2.add("인천");
-		 * 
-		 * 
-		 * list3.add("qwe"); list3.add("26"); list3.add("파주시"); list3.add("김포");
-		 * 
-		 * 
-		 * list4.add("asd"); list4.add("25"); list4.add("강원도"); list4.add("선릉");
-		 * 
-		 * map.put(1234, list1); map.put(2345, list2); map.put(3456, list3);
-		 * map.put(4567, list4);
-		 * 
-		 * 
-		 * System.out.println("["+"이름"+","+" 나이"+","+"거주지"+","+"근무지"+"]");
-		 * 
-		 * Iterator<Integer> itr = map.keySet().iterator(); int itrs = itr.next();
-		 * 
-		 * while(itr.hasNext()) { System.out.println(itr + ":" + map.get(itr) ); }
-		 * 
-		 * while(true) {
-		 * 
-		 * System.out.println("---------------------------------------");
-		 * System.out.println("1. 고객정보 전체출력 2. 추가항목 3. 갱신사항 4. 삭제항목");
-		 * System.out.println("---------------------------------------");
-		 * System.out.println("번호를 선택하세요 : ");
-		 * 
-		 * number1 = scanner.nextInt();
-		 * 
-		 * if (number1 == 1) { System.out.println("고객정보 전체출력. "); for (int i = 0; i <
-		 * map.size(); i++) { System.out.println("고객정보 : " + map.get(i)); } } else if
-		 * (number1 == 2) { System.out.println("추가항목 선택. ");
-		 * System.out.println("고객 고유번호 선택 : "); number2 = scanner.nextInt();
-		 * 
-		 * if (map.containsKey(number2)) { // scanner에 고유번호 선택하여 map에 키 여부 확
-		 * System.out.println("추가내용 : "); str1 = scanner.next(); map.put(number2,
-		 * list1.add(str1));
-		 * 
-		 * } else { System.out.println("키가 존재하지 않습니다."); }
-		 * 
-		 * } }
-		 */
-		/*
-		 * HashMap<String, String> hm = new HashMap<String, String>(); //hashmap
-		 * 
-		 * hm.put("이름", "cho"); hm.put("나이", "28"); hm.put("거주지", "성남시"); hm.put("근무지역",
-		 * "판교");
-		 * 
-		 * 
-		 * while(true) {
-		 * 
-		 * 
-		 * int selectNum; String optionKey; String optionValue; String optionKey_1;
-		 * String optionValue_1;
-		 * 
-		 * System.out.println("---------------------------------------");
-		 * System.out.println("1. 본인정보 2. 추가항목 3. 갱신사항 4. 삭제항목");
-		 * System.out.println("---------------------------------------");
-		 * System.out.println("번호를 선택하세요 : ");
-		 * 
-		 * selectNum = scanner.nextInt();
-		 * 
-		 * if (selectNum == 1) { // 본인정보 출력
-		 * 
-		 * Iterator<String> keys = hm.keySet().iterator();
-		 * 
-		 * while(keys.hasNext()) { String key = keys.next(); System.out.println(key +
-		 * ":" + hm.get(key)); }
-		 * 
-		 * } else if (selectNum == 2) { // 추가항목 System.out.println("추가항목 선택");
-		 * System.out.println("항목 : "); optionKey = scanner.next();
-		 * System.out.println("값 : "); optionValue = scanner.next();
-		 * 
-		 * hm.put(optionKey, optionValue); System.out.println(optionKey + ":" +
-		 * optionValue + " \n 추 가 ");
-		 * 
-		 * } else if (selectNum == 3) { // 갱신사항
-		 * 
-		 * System.out.println("갱신사항 선택"); System.out.print("항목 : "); optionKey =
-		 * scanner.next(); System.out.print("갱신항목 : "); optionKey_1 = scanner.next();
-		 * System.out.print("값 : "); optionValue = scanner.next();
-		 * System.out.print("갱신 예정값 : "); optionValue_1= scanner.next();
-		 * 
-		 * if(hm.containsKey(optionKey)) { hm.remove(optionKey, optionValue); //삭제 후
-		 * 
-		 * hm.put(optionKey_1, optionValue_1); //새로운 부분 완성. System.out.println(optionKey
-		 * + ":" + optionValue + " 에서 " + optionKey_1 + ":" + optionValue_1 +
-		 * "으로 \n 갱 신 완 료 ");
-		 * 
-		 * } else if (!hm.containsKey(optionValue)) {
-		 * System.out.println("키 값이 존재하지 않습니다. "); } else {
-		 * System.out.println("항목이 존재하지 않습니다. "); }
-		 * 
-		 * } else if (selectNum == 4) { // 삭제항목 System.out.println("삭제항목 선택 ");
-		 * System.out.println("삭제항목 :  "); optionKey = scanner.next();
-		 * System.out.println("삭제값 : "); optionValue = scanner.next();
-		 * 
-		 * if(hm.containsKey(optionKey)) { System.out.println(optionKey + ":" +
-		 * optionValue + "\n 삭 제 완 료"); hm.remove(optionKey, optionValue); } else {
-		 * System.out.println("삭제 할 항목이 존재하지 않습니다."); }
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
-		
 	}
-
 }
