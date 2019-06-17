@@ -1,4 +1,4 @@
-package ProjectPackage;
+package projectPackage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 // 나머지 맵은 else조건으로 고유번호가 존재하지 않는다고 작성하면 고유번호가 일치한 1개의 맵을 제외하고 나머지 맵에 출력이 모두 되어
 // 오류를 찾지 못하였습니다.
 
-public class TestProject1 {
+public class TestProject2 {
 
 	public static void main(String[] args) {
 		
@@ -88,11 +88,7 @@ public class TestProject1 {
 			
 			if (number1 == 1) {		
 				
-				List<Map<String, String>> str = mainList
-						.stream()
-						.collect(Collectors.toList());
-				
-				str.parallelStream().forEach(s -> System.out.println(s));
+				mainList.stream().forEach(s -> System.out.println(s));
 				 
 			} else if (number1 == 2) {
 				System.out.println("추가항목 선택.");
@@ -106,15 +102,40 @@ public class TestProject1 {
 //				List<Map<String,String>> stream1 = (List<Map<String, String>>) mainList
 //						.stream();
 //				
-			List<Map<String,String>> list1 =  mainList
-					.parallelStream()
-					.filter(s -> s.get("고유번호").equals(number2))
-					.collect(Collectors.toList())
-					.forEach(s -> s.get(0)));
-			
-			list1.get(0).put(str1, str2);
-			
-			list1.parallelStream().forEach(s -> System.out.println(s));
+//			
+//			Stream<Map<String, String>> mapCollect1 = mainList
+//					.stream()
+//					.filter(s -> {
+//						if (s.get("고유번호").equals(number2)) {
+//							mainList.get(0).put(str1, str2);
+//							return true;
+//						} else {
+//							System.out.println("고유번호 존재하지 않습니다.");
+//							return false;
+//						}
+//						
+//					});
+				
+				Stream<Map<String, String>> mapCollect = 
+						mainList.stream();
+				
+//				Map<String, String> subMap = 
+//						((Map<String, String>) mapCollect)
+//						.entrySet()
+//						.stream()
+//						.filter(s -> s.get("고유번호").equals(number2))
+//						.collect(Collectors.toMap(i -> i.getKey(),i -> i.getValue()));
+				
+				List<Map<String,String>> subList = 
+						mapCollect
+						.filter(s -> s.get("고유번호").equals(number2))
+						.collect(Collectors.toList());
+				
+				System.out.println(subList.get(i).put(str1, str2));
+					
+					
+					
+					
 			
 						
 				
@@ -210,7 +231,6 @@ public class TestProject1 {
 		
 		}
 				
-		
+	}	
 			
 	}
-}
