@@ -2,10 +2,15 @@ package projectPackage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,19 +18,14 @@ import java.util.stream.Stream;
 
 // 과 제
 // 이름 : 조 현 중
-// 제출일 : 2019.06.13
+// 제출일 : 2019.06.24
 // 제출기한 : 2019.06.06
 // 제출내용 : collection framework를 활용한 출력,추가,갱신,삭제 구현 
 // List,Map을 활용하였으며, scanner를 사용 함.
 
-// for문을 사용하여 직접적인 map의 키 값을 가지고 scanner의 입력 값과 일치한지 조건식을 내서 출력확인을 하였으나,
-// for문을 도는 중에 각 맵을 0번째 부터 일일이 거쳐가는 과정에서 특정 고유번호를 소유한 맵을 제외한 
-// 나머지 맵은 else조건으로 고유번호가 존재하지 않는다고 작성하면 고유번호가 일치한 1개의 맵을 제외하고 나머지 맵에 출력이 모두 되어
-// 오류를 찾지 못하였습니다.
-
 public class TestProject2 {
 
-	public static void main(String[] args) {
+	public final static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in); 							//scanner
 		
@@ -33,7 +33,7 @@ public class TestProject2 {
 		Map<String, String> map1 = new HashMap<String, String>();
 		Map<String, String> map2 = new HashMap<String, String>();
 		Map<String, String> map3 = new HashMap<String, String>();
-		
+		Map<String, String> map4 = new HashMap<String, String>();
 		List<Map<String, String>> mainList = new ArrayList<Map<String,String>>();
 		
 		map0.put("고유번호","1234");
@@ -76,9 +76,10 @@ public class TestProject2 {
 		while(true) {
 			int number1;
 			String number2;
-			String str1;
-			String str2;
-			String str3;
+			String str1 = "";
+			String str2 = "";
+			String str3 = "";
+			String str4 = "";
 			System.out.println("------------------------------------------------------------------");
 			System.out.println("1. 고객정보 전체출력 2. map 추가 3. 추가항목 4. 갱신사항 5. 삭제항목 6. 개별조회");
 			System.out.println("---------------------------------------");
@@ -87,144 +88,129 @@ public class TestProject2 {
 			number1 = scanner.nextInt();
 			
 			if (number1 == 1) {		
-				
+				System.out.println("고객정보 전체출력.");
 				mainList.stream().forEach(s -> System.out.println(s));
 				 
 			} else if (number1 == 2) {
+				System.out.println("map 추가 선택.");
+				System.out.println("고유번호 입력(필수) : ");
+				number2 = scanner.next();
+				System.out.println("이름 입력 : ");
+				str1 = scanner.next();
+				System.out.println("나이 입력 : ");
+				str2 = scanner.next();
+				System.out.println("거주지 입력 : ");
+				str3 = scanner.next();
+				System.out.println("근무지 입력 : ");
+				str4 = scanner.next();
+				
+				if (number2 == " " || number2 == null) {
+					System.out.println("고유번호를 다시 입력하세요.");
+				}
+				
+				if (str1 == "" || str2 == "" || str3 == "" || str4 == "") {
+					System.out.println("빈칸입니다. 다시 입력하세요.");
+				}
+				map4.put("고유번호",number2);
+				map4.put("이름", str1);
+				map4.put("나이", str2);
+				map4.put("거주지", str3);
+				map4.put("근무지", str4);
+				
+				mainList.add(map4);
+				
+				
+				
+				
+//				Map<Object,Object> collect 
+//				= map0.entrySet().stream()
+//				.filter(x -> x.getKey().equals(number2))
+//				.collect(Collectors
+//						.toMap(x -> x.getKey(), x -> x.getValue()));			
+//				System.out.println("추가 키 입력 : ");
+//				str1 = scanner.next();
+//				System.out.println("추가 값 입력 : ");
+//				str2 = scanner.next();
+//				map0.put(str1, str2);
+//				mainList.stream().forEach(x -> System.out.println(x));
+				
+		
+				/*
+				 * // 조건을 주었는데도 불구하고 고유번호가 일치하게 넣든 안 넣든 간에 무조건 값이 바뀐다.. Map<Object, Object>
+				 * collect = map0.entrySet().stream() .filter(x -> { if (x.getKey() == "고유번호" &&
+				 * x.getValue() == number2) { return true; } else { return false; } })
+				 * .collect(Collectors .toMap(x -> x.getKey(), x -> x.getValue()));
+				 * 
+				 * System.out.println("추가 키 입력 : "); str1 = scanner.next();
+				 * System.out.println("추가 값 입력 : "); str2 = scanner.next(); map0.put(str1,
+				 * str2); mainList.stream().forEach(x -> System.out.println(x));
+				 */
+				
+																	
+			} else if (number1 == 3) {
 				System.out.println("추가항목 선택.");
 				System.out.println("고유번호 입력 : ");
 				number2 = scanner.next();
+				List<Map<String, String>> collectList = mainList.stream()
+						.filter(x -> x.get("고유번호").equals(number2))
+						.collect(Collectors.toList());
+				
+				System.out.println(collectList); // 결과를 찾음. 고유번호에 맞는 맵만 골라서 찾음.
+				
 				System.out.println("추가 키 입력 : ");
 				str1 = scanner.next();
 				System.out.println("추가 값 입력 : ");
 				str2 = scanner.next();
+				collectList.get(0).put(str1, str2); // 고유의 번호이므로 한개만 존재한다 list->list->map 
 				
-//				List<Map<String,String>> stream1 = (List<Map<String, String>>) mainList
-//						.stream();
-//				
-//			
-//			Stream<Map<String, String>> mapCollect1 = mainList
-//					.stream()
-//					.filter(s -> {
-//						if (s.get("고유번호").equals(number2)) {
-//							mainList.get(0).put(str1, str2);
-//							return true;
-//						} else {
-//							System.out.println("고유번호 존재하지 않습니다.");
-//							return false;
-//						}
-//						
-//					});
-				
-				Stream<Map<String, String>> mapCollect = 
-						mainList.stream();
-				
-//				Map<String, String> subMap = 
-//						((Map<String, String>) mapCollect)
-//						.entrySet()
-//						.stream()
-//						.filter(s -> s.get("고유번호").equals(number2))
-//						.collect(Collectors.toMap(i -> i.getKey(),i -> i.getValue()));
-				
-				List<Map<String,String>> subList = 
-						mapCollect
-						.filter(s -> s.get("고유번호").equals(number2))
-						.collect(Collectors.toList());
-				
-				System.out.println(subList.get(i).put(str1, str2));
-					
-					
-					
-					
+			}
 			
-						
-				
-				
-						
-						
-				
-				
-				
-						
-				
-				
-				
-//				List<Map<String, String>> stream2 = map.stream1
-//						.stream()
-//						.filter(s -> s.get("고유번호").equals(number2));
-//						System.out.println("추가 키 입력 : ");
-//						str1 = scanner.next();
-//						System.out.println("추가 값 입력 : ");
-//						str2 = scanner.next();
-//						stream2.parallelStream().forEach((Map<String,String> s) -> System.out.println(s.put(str1, str2)));
-//						
-//				Stream<Object> resultStr = mainList.stream().map(x -> x.put(str1, str2));
-				
-//				for (int i = 0; i < mainList.size(); i++) {	
-//					
-//						if (mainList.get(i).get("고유번호").equals(number2)) { // list에 i번째 map에 object key를 받는 get함수의 고유번호가 scanner 입력값과 일치 할 경우
-//							System.out.println("추가 키 입력 : ");
-//							str1 = scanner.next();
-//							System.out.println("추가 값 입력 : ");
-//							str2 = scanner.next();
-//							
-//							
-//							mainList.get(i).put(str1, str2); // 해당하는 mainList의 map i번째에 key,value생성
-//							System.out.println("추 가 완 료");
-//						
-//					} 
-//					
-//				}
-			
-																		
-			} else if (number1 == 3) {
+			else if (number1 == 4) {
 				System.out.println("갱신항목 선택.");
 				System.out.println("고유번호 입력 : ");
 				number2 = scanner.next();
-				for (int i = 0; i < mainList.size(); i++) {
-					if (mainList.get(i).get("고유번호").equals(number2)) { // list에 i번째 map에 object key를 받는 get함수의 고유번호가 scanner 입력값과 일치 할 경우
-						System.out.println("갱신 전 키 입력 : ");
-						str1 = scanner.next();
-						System.out.println("갱신 키 입력 : ");
-						str2 = scanner.next();
-						System.out.println("갱신 값 입력 : ");
-						str3 = scanner.next();
-						
-						mainList.get(i).remove(str1);
-						mainList.get(i).put(str2, str3); // 해당하는 mainList의 map i번째에 key,value생성
-						System.out.println("갱 신 완 료");
-						
-					} 
-				}
+				List<Map<String, String>> collectList = mainList.stream()
+						.filter(x -> x.get("고유번호").equals(number2))
+						.collect(Collectors.toList());
 				
-			} else if (number1 == 4) {
-				System.out.println("삭제항목 선택.");
-				System.out.println("고유번호 입력 : ");
-				number2 = scanner.next();
-					
-				for (int i = 0; i < mainList.size(); i++) {
-					if (mainList.get(i).get("고유번호").equals(number2)) { // list에 i번째 map에 object key를 받는 get함수의 고유번호가 scanner 입력값과 일치 할 경우
-						System.out.println("삭제할 키 입력 : ");
-						str1 = scanner.next();
-											
-						mainList.get(i).remove(str1);
-						System.out.println("갱 신 완 료");
-						
-					}
-				}
-			
+				System.out.println(collectList); 
+				
+				System.out.println("갱신할 키 입력 : ");
+				str1 = scanner.next();
+				System.out.println("새로운 키 입력 : ");
+				str2 = scanner.next();
+				System.out.println("새로운 값 입력 : ");
+				str3 = scanner.next();
+				collectList.get(0).remove(str1);
+				collectList.get(0).put(str1, str2);  
+				 
+				
+				
 			} else if (number1 == 5) {
+				System.out.println("삭제항목 선택.");
+				System.out.println("삭제번호 입력 : ");
+				number2 = scanner.next();
+				List<Map<String, String>> collectList = mainList.stream()
+						.filter(x -> x.get("고유번호").equals(number2))
+						.collect(Collectors.toList());
+				
+				System.out.println(collectList); 
+				
+				System.out.println("삭제할 키 입력 : ");
+				str1 = scanner.next();
+				
+				//collectList.get(0).remove(str1);
+				collectList.get(0).entrySet().removeIf(x -> x.getKey().equals(number2));
+			
+			} else if (number1 == 6) {
 				System.out.println("개별조회.");
 				System.out.println("고유번호 입력 : ");
 				number2 = scanner.next();
+				List<Map<String, String>> collectList = mainList.stream()
+						.filter(x -> x.get("고유번호").equals(number2))
+						.collect(Collectors.toList());
 				
-				for (int i = 0; i < mainList.size(); i++) {
-					if (mainList.get(i).get("고유번호").equals(number2)) { // list에 i번째 map에 object key를 받는 get함수의 고유번호가 scanner 입력값과 일치 할 경우
-						
-						System.out.println(mainList.get(i));
-						
-					} 
-				}
+				System.out.println(collectList.get(0)); 
 				
 			}
 
